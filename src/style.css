@@ -13,6 +13,9 @@ body {
   display: block;
   cursor: default;
 }
+.container {
+  max-height: 100%;
+}
 
 #search-form {
   text-align: center;
