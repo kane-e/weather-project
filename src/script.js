@@ -1,24 +1,7 @@
-function formatDate(date) {
-  let hours = date.getHours();
-  if (hours < 10) {
-    hours = `0${hours}`;
-  }
-  let minutes = date.getMinutes();
-  if (minutes < 10) {
-    minutes = `0${minutes}`;
-  }
-  if (hours < 12) {
-    half = `AM`;
-  } else {
-    half = `PM`;
-  }
-  if (hours > 12) {
-    hours = date.getHours() - 12;
-  }
-
+function formatDate(timestamp) {
+  let date = new Date(timestamp);
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let day = days[date.getDay()];
-
   let months = [
     "Jan",
     "Feb",
@@ -35,7 +18,27 @@ function formatDate(date) {
   ];
   let month = months[date.getMonth()];
   let number = date.getDate();
-  return `${day} ${month} ${number}, ${hours}:${minutes} ${half}`;
+  return `${day} ${month} ${number}, ${formatHours(timestamp)} ${half}`;
+}
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  if (hours > 12) {
+    hours = date.getHours() - 12;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  if (hours < 12) {
+    half = `AM`;
+  } else {
+    half = `PM`;
+  }
+  return `${hours}:${minutes}`;
 }
 
 function runGeo() {
@@ -46,16 +49,14 @@ function getPosition(position) {
   let lat = position.coords.latitude;
   let lon = position.coords.longitude;
   let units = "imperial";
-
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
   axios.get(apiUrl).then(getWeather);
 }
 
 function searchCity(city) {
   let units = "imperial";
-
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-  axios.get(apiUrl).then(getWeather);
+  axios.get(apiUrl).then(getWeather).then(formatDate);
 }
 function getCity(event) {
   event.preventDefault();
@@ -84,11 +85,10 @@ function getWeather(response) {
     response.data.weather[0].main;
   document.querySelector("#sunrise").innerHTML = response.data.sys.sunrise;
   document.querySelector("#sunset").innerHTML = response.data.sys.sunset;
+  document.querySelector("#date-time").innerHTML = formatDate(
+    response.data.dt * 1000
+  );
 }
-
-let dateTime = document.querySelector("#date-time");
-let now = new Date();
-dateTime.innerHTML = formatDate(now);
 
 let apiKey = "0d71af642be5de39b82dbc1fda436287";
 
