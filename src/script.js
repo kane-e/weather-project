@@ -18,7 +18,7 @@ function formatDate(timestamp) {
   ];
   let month = months[date.getMonth()];
   let number = date.getDate();
-  return `${day} ${month} ${number}, ${formatHours(timestamp)} ${half}`;
+  return `${day} ${month} ${number}, ${formatHours(timestamp)}`;
 }
 function formatHours(timestamp) {
   let date = new Date(timestamp);
@@ -26,18 +26,11 @@ function formatHours(timestamp) {
   if (hours < 10) {
     hours = `0${hours}`;
   }
-  if (hours > 12) {
-    hours = date.getHours() - 12;
-  }
   let minutes = date.getMinutes();
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
-  if (hours < 12) {
-    half = `AM`;
-  } else {
-    half = `PM`;
-  }
+
   return `${hours}:${minutes}`;
 }
 
@@ -83,8 +76,12 @@ function getWeather(response) {
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector(".current-condition").innerHTML =
     response.data.weather[0].main;
-  document.querySelector("#sunrise").innerHTML = response.data.sys.sunrise;
-  document.querySelector("#sunset").innerHTML = response.data.sys.sunset;
+  document.querySelector("#sunrise").innerHTML = formatHours(
+    response.data.sys.sunrise * 1000
+  );
+  document.querySelector("#sunset").innerHTML = formatHours(
+    response.data.sys.sunset * 1000
+  );
   document.querySelector("#date-time").innerHTML = formatDate(
     response.data.dt * 1000
   );
