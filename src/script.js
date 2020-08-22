@@ -49,7 +49,7 @@ function getPosition(position) {
 function searchCity(city) {
   let units = "imperial";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-  axios.get(apiUrl).then(getWeather).then(formatDate);
+  axios.get(apiUrl).then(getWeather);
 }
 function getCity(event) {
   event.preventDefault();
