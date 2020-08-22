@@ -76,15 +76,15 @@ function getWeather(response) {
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector(".current-condition").innerHTML =
     response.data.weather[0].main;
-  document.querySelector("#sunrise").innerHTML = formatHours(
-    response.data.sys.sunrise * 1000
-  );
-  document.querySelector("#sunset").innerHTML = formatHours(
-    response.data.sys.sunset * 1000
-  );
   document.querySelector("#date-time").innerHTML = formatDate(
     response.data.dt * 1000
   );
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 let apiKey = "0d71af642be5de39b82dbc1fda436287";
