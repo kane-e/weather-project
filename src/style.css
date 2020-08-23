@@ -3,6 +3,25 @@ body {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
   background-color: rgba(164, 166, 173, 0.5);
 }
+hr {
+  border: 1px dotted rgba(243, 198, 35, 0.6);
+  width: 100%;
+  margin: 0 auto 5px;
+}
+
+h2 {
+  text-align: center;
+  margin-right: 0;
+  color: #f4f6ff;
+  position: relative;
+  bottom: 25px;
+}
+h3 {
+  text-align: center;
+  margin: 0 auto 30px;
+  font-size: 17px;
+  color: #f4f6ff;
+}
 
 .weather-app {
   border: 2px solid gray;
@@ -13,6 +32,53 @@ body {
   background-image: linear-gradient(to top, #09203f 0%, #537895 100%);
   display: block;
   cursor: default;
+}
+.current-unit {
+  font-size: 18px;
+  position: relative;
+  bottom: 22px;
+  color: white;
+}
+
+.active {
+  color: black;
+  cursor: default;
+}
+.active:hover {
+  color: black;
+  text-decoration: none;
+}
+.conditions {
+  position: relative;
+  bottom: 120px;
+  color: #f4f6ff;
+  font-size: 15px;
+  line-height: 3;
+  text-align: center;
+}
+.wind-col,
+.humidity-col {
+  position: relative;
+  top: 15px;
+}
+
+.current-condition {
+  color: #f4f6ff;
+  font-size: 22px;
+  position: relative;
+  bottom: 30px;
+  margin: 0 auto 20px;
+}
+
+.forecast {
+  color: #f4f6ff;
+  font-size: 18px;
+  margin: 0 15px;
+  position: relative;
+  bottom: 30px;
+}
+.forecast-image {
+  max-width: 30px;
 }
 
 #search-form {
@@ -64,73 +130,15 @@ body {
   font-size: 10px;
   margin: 0 auto 5px;
 }
-hr {
-  border: 1px dotted rgba(243, 198, 35, 0.6);
-  width: 100%;
-  margin: 0 auto 5px;
-}
-
-h2 {
-  text-align: center;
-  margin-right: 0;
-  color: #f4f6ff;
-  position: relative;
-  bottom: 25px;
-}
 
 #current-temp {
   font-size: 43px;
 }
-.current-unit {
-  font-size: 18px;
+#icon {
   position: relative;
-  bottom: 22px;
-  color: white;
+  bottom: 40px;
 }
 
-h3 {
-  text-align: center;
-  margin: 0 auto 30px;
-  font-size: 17px;
-  color: #f4f6ff;
-}
-
-.conditions {
-  position: relative;
-  bottom: 100px;
-  color: #f4f6ff;
-  font-size: 15px;
-  line-height: 3;
-  text-align: center;
-}
-.windCol,
-.humidityCol {
-  position: relative;
-  top: 15px;
-}
-
-.current-condition {
-  color: #f4f6ff;
-  font-size: 22px;
-  position: relative;
-  bottom: 30px;
-  margin: 0 auto 20px;
-}
-.alert {
-  position: relative;
-  bottom: 30px;
-  width: 100px;
-}
-.forecast {
-  color: #f4f6ff;
-  font-size: 18px;
-  margin: 0 15px;
-  position: relative;
-  bottom: 30px;
-}
-.forecast-image {
-  max-width: 30px;
-}
 #code-by {
   position: relative;
   top: 12px;

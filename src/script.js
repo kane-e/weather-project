@@ -53,13 +53,14 @@ function searchCity(city) {
 }
 function getCity(event) {
   event.preventDefault();
-  let city = document.querySelector("#search-input").value;
-  searchCity(city);
+  let cityInput = document.querySelector("#search-input");
+  searchCity(cityInput.value);
 }
 
 function getWeather(response) {
+  fahrenheitTemperature = response.data.main.temp;
   document.querySelector("#current-temp").innerHTML = Math.round(
-    response.data.main.temp
+    fahrenheitTemperature
   );
   document.querySelector(
     "h1"
@@ -79,12 +80,29 @@ function getWeather(response) {
   document.querySelector("#date-time").innerHTML = formatDate(
     response.data.dt * 1000
   );
+
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+}
+
+function getCelsius(event) {
+  event.preventDefault();
+  let currentTemperature = document.querySelector("#current-temp");
+  let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
+  currentTemperature.innerHTML = Math.round(celsiusTemperature);
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+}
+function getFahrenheit(event) {
+  event.preventDefault();
+  let currentTemperature = document.querySelector("#current-temp");
+  currentTemperature.innerHTML = Math.round(fahrenheitTemperature);
+  fahrenheitLink.classList.add("active");
+  celsiusLink.classList.remove("active");
 }
 
 let apiKey = "0d71af642be5de39b82dbc1fda436287";
@@ -94,5 +112,13 @@ searchForm.addEventListener("click", getCity);
 
 let locationButton = document.querySelector("#location-button");
 locationButton.addEventListener("click", runGeo);
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", getCelsius);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", getFahrenheit);
+
+let fahrenheitTemperature = null;
 
 searchCity("Tokyo");
