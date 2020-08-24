@@ -114,23 +114,26 @@ function getWeather(response) {
 
 function getCelsius(event) {
   event.preventDefault();
-  let currentTemperature = document.querySelector("#current-temp");
   let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
-  currentTemperature.innerHTML = Math.round(celsiusTemperature);
+  document.querySelector("#current-temp").innerHTML = Math.round(
+    celsiusTemperature
+  );
+
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
 }
 function getFahrenheit(event) {
   event.preventDefault();
-  let currentTemperature = document.querySelector("#current-temp");
-  currentTemperature.innerHTML = Math.round(fahrenheitTemperature);
+  document.querySelector("#current-temp").innerHTML = Math.round(
+    fahrenheitTemperature
+  );
   fahrenheitLink.classList.add("active");
   celsiusLink.classList.remove("active");
 }
 
 let apiKey = "0d71af642be5de39b82dbc1fda436287";
 
-let searchForm = document.querySelector("#search-form");
+let searchForm = document.querySelector(".search-form");
 searchForm.addEventListener("click", getCity);
 
 let locationButton = document.querySelector("#location-button");
