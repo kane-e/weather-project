@@ -50,7 +50,30 @@ function searchCity(city) {
   let units = "imperial";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(getWeather);
+
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(getForecast);
 }
+
+function getForecast(response) {
+  console.log(response.data);
+  document.querySelector("#day-one-high").innerHTML = Math.round(
+    response.data.list[7].main.temp_max
+  );
+  document.querySelector("#day-two-high").innerHTML = Math.round(
+    response.data.list[15].main.temp_max
+  );
+  document.querySelector("#day-three-high").innerHTML = Math.round(
+    response.data.list[23].main.temp_max
+  );
+  document.querySelector("#day-four-high").innerHTML = Math.round(
+    response.data.list[31].main.temp_max
+  );
+  document.querySelector("#day-five-high").innerHTML = Math.round(
+    response.data.list[39].main.temp_max
+  );
+}
+
 function getCity(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#search-input");
