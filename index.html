@@ -9,30 +9,30 @@
 <script src="https://kit.fontawesome.com/d6507071b2.js" crossorigin="anonymous"></script>
 
 <link rel="stylesheet" href="src/style.css" />
-<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Hind&display=swap" rel="stylesheet">
+
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <title>WeatherNow</title>
 </head>
 
 <body>
-    <div class="weather-app">
-        
-        <div class="container">
+    <div class="container">
+      <div class="wrapper">
+        <div class="weather-app">
             
-            <form id="search-form">
+            <form class="search-form">
 
                 <input type="text" placeholder="Enter City or ZIP" autocomplete="off" autofocus="on"
                     id="search-input" />
                 <input type="submit" value="Search" id="submit" />
                 <button id="location-button"><i class="fas fa-map-marker-alt"></i></button>
+
             </form>
+            
             <hr>
 
-            
               <h1 id="city"> </h1>
-              
-              
-               
+
             <div id="last-updated" >Last Updated</div>
             <h3> <span id="date-time">  </span></h3>
 
@@ -40,9 +40,12 @@
                 <div class="row">
                     <div class="col-8 text-right">
                         <span id="current-temp"></span>
-                        <span class="current-unit"> 
-                          <a href src="" id="fahrenheit-link" class ="active">°F</a> | 
-                          <a href src="" id="celsius-link" >°C</a></span>
+                       
+                        <span class="current-unit">
+                            <a href src="" id="fahrenheit-link" class="active">°F</a> |
+                            <a href src="" id="celsius-link">°C</a></span>
+                         
+                        
                     </div>
 
                 </div>
@@ -55,15 +58,16 @@
 
             </div>
 
-      
-                <div class="row conditions ">
+              <div class="row conditions ">
                 <div class="col-6">
-                    <strong>High </strong><span id="high"></span> °F
+                    <strong>Low </strong><span id="low"></span>°
+                </div>
+
+                <div class="col-6">
+                    <strong>High </strong><span id="high"></span>°
                 </div>
                 
-                <div class="col-6">
-                    <strong>Low </strong><span id="low"></span>°F
-                </div>
+                
             </div>
             <div class="row conditions">
                 <div class="col-6 wind-col">
@@ -74,39 +78,48 @@
                     <strong> Humidity </strong> <span id="humidity"></span>%
                 </div>
               </div>
+              <div class="row conditions">
+                <div class="col-6">
+                  <strong>Sunrise </strong><span id="sunrise"></span>6:00
+                </div>
+              
+                <div class="col-6">
+                  <strong> Sunset </strong> <span id="sunset"></span>9:00
+                </div>
+              </div>
             
             <div class="row forecast text-center">
                 <div class="col ">
                         <div id="day-one">Mon</div>
-                        <div> <span id="day-one-high"> </span>°F</div>
+                        <div> <span id="day-one-high"> </span>°</div>
                         <div><img id="forecast-icon-1" src="images/sun2.png"></div>
                         <div id="day-one-low"></div>
                     
                 </div>
                 <div class="col">
                         <div id="day-two">Tue</div>
-                        <div><span id="day-two-high"></span>°F</div>
+                        <div><span id="day-two-high"></span>°</div>
                         <div ><img id="forecast-icon-2" src="images/partly-cloudy.png"></div>
                         <div id="day-two-low"></div>
                     
                 </div>
                 <div class="col " >
                         <div id="day-three">Wed</div>
-                        <div><span id="day-three-high"></span>°F</div>
+                        <div><span id="day-three-high"></span>°</div>
                         <div><img id="forecast-icon-3" src="images/partly-cloudy.png"></div>
                         <div class="" id="day-three-low"></div>
                     
                 </div>
                 <div class="col">
                         <div id="day-four">Thur</div>
-                        <div> <span id="day-four-high"></span>°F</div>
+                        <div> <span id="day-four-high"></span>°</div>
                         <div><img id="forecast-icon-4" src="images/sun2.png"></div>
                         <div id="day-four-low"></div>
                     
                 </div>
                 <div class="col">
-                        <div id="day-five">Fri</div>
-                        <div><span id="day-five-high"></span>°F</div>
+                        <div id="day-five">Fri  </div>
+                        <div><span id="day-five-high"></span>°</div>
                         <div><img id="forecast-icon-5" src="images/partly-cloudy.png"></div>
                         <div id="day-five-low"></div>
                     
@@ -114,7 +127,7 @@
         
             </div>
             <div id="code-by"><a href="https://github.com/kane-e/weather-project" target="_blank">Open-source code</a> by Emma Kane</div>
-            
+          </div>
         </div>
        
       
