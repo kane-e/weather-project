@@ -78,6 +78,7 @@ function getCity(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#search-input");
   searchCity(cityInput.value);
+  document.querySelector("#search-input").value = "";
 }
 
 function getWeather(response) {
