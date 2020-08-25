@@ -139,10 +139,7 @@ h3 {
   width: 100px;
 }
 @media screen and (max-width: 480px) {
-  .forecast {
-    max-width: 80%;
-  }
-  .forecast img {
-    width: 10%;
+  .forecast col {
+    max-width: 10%;
   }
 }
