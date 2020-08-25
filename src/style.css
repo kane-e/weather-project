@@ -142,4 +142,7 @@ h3 {
   .forecast {
     max-width: 80%;
   }
+  .forecast img {
+    width: 10%;
+  }
 }
