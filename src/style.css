@@ -138,3 +138,8 @@ h3 {
   bottom: 20px;
   width: 100px;
 }
+@media screen and (max-width: 480px) {
+  .forecast {
+    max-width: 80%;
+  }
+}
