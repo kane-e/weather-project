@@ -103,7 +103,6 @@ function getForecastDay(timestamp) {
 }
 function getForecast(response) {
   console.log(response.data);
-
   let forecastElement = document.querySelector(".forecast");
   forecastElement.innerHTML = null;
   let forecast = null;
@@ -121,31 +120,49 @@ function getForecast(response) {
   }
 }
 
-function forecastCelsius() {
-  let forecastCelsius = document.querySelectorAll(".forecast-high");
-  forecastCelsius.forEach(getCelsius());
-
-  forecastCelsius.innerHTML = Math.round((currentTemp - 32) * (5 / 9));
-}
-
 function getCelsius(event) {
   event.preventDefault();
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("not-active");
+
   let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
   document.querySelector("#current-temp").innerHTML = Math.round(
     celsiusTemperature
   );
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
 
   forecastCelsius();
 }
+
+function forecastCelsius() {
+  event.preventDefault();
+  let forecastElement = document.querySelector(".forecast");
+  forecastElement.innerHTML = null;
+  let forecast = null;
+  for (let index = 1; index < 6; index++) {
+    forecast = response.data.daily[index];
+    forecastElement.innerHTML += `<div class="col col-xs-1">
+          <div>${getForecastDay(forecast.dt * 1000)}</div>
+          <div> <span>${Math.round(forecast.temp.max)}</span>°</div>
+          <div><img src="http://openweathermap.org/img/wn/${
+            forecast.weather[0].icon
+          }@2x.png"></div>
+          <div><span>${Math.round(forecast.temp.min)}</span>°</div> 
+      </div>
+      `;
+  }
+}
+
 function getFahrenheit(event) {
   event.preventDefault();
+  fahrenheitLink.classList.add("active");
+
+  celsiusLink.classList.remove("active");
+  celsiusLink.classList.add("not-active");
+
   document.querySelector("#current-temp").innerHTML = Math.round(
     fahrenheitTemperature
   );
-  fahrenheitLink.classList.add("active");
-  celsiusLink.classList.remove("active");
 }
 
 let apiKey = "0d71af642be5de39b82dbc1fda436287";
@@ -163,5 +180,6 @@ let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", getFahrenheit);
 
 let fahrenheitTemperature = null;
+let forecastFahrenheit = null;
 
 searchCity("Tokyo");
