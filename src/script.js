@@ -124,7 +124,7 @@ function getCelsius(event) {
   event.preventDefault();
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
-  fahrenheitLink.classList.remove("not-active");
+  fahrenheitLink.classList.add("not-active");
 
   let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
   document.querySelector("#current-temp").innerHTML = Math.round(
