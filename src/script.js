@@ -43,7 +43,7 @@ function getPosition(position) {
   let lon = position.coords.longitude;
   let units = "imperial";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
-  axios.get(apiUrl).then(getWeather);
+  axios.get(apiUrl).then(getWeather).then(getLocalTime);
 }
 
 function searchCity(city) {
@@ -51,10 +51,20 @@ function searchCity(city) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(getWeather);
 }
+function searchZip(zip) {
+  let units = "imperial";
+  let apiUrl = `api.openweathermap.org/data/2.5/weather?zip = ${zipcode}, ${countrycode}&appid=${apiUrl}&units=${units}`;
+  axios.get(apiUrl).then(getWeather);
+}
 
 function getCity(event) {
   event.preventDefault();
   let cityInput = document.querySelector("#search-input");
+  if (isNaN(cityInput.value)) {
+    searchCity();
+  } else {
+    searchZip;
+  }
   searchCity(cityInput.value);
 }
 
@@ -125,38 +135,18 @@ function getCelsius(event) {
   celsiusLink.classList.add("active");
   fahrenheitLink.classList.remove("active");
   fahrenheitLink.classList.add("not-active");
+  celsiusLink.classList.remove("not-active");
 
   let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
   document.querySelector("#current-temp").innerHTML = Math.round(
     celsiusTemperature
   );
-
-  forecastCelsius();
-}
-
-function forecastCelsius() {
-  event.preventDefault();
-  let forecastElement = document.querySelector(".forecast");
-  forecastElement.innerHTML = null;
-  let forecast = null;
-  for (let index = 1; index < 6; index++) {
-    forecast = response.data.daily[index];
-    forecastElement.innerHTML += `<div class="col col-xs-1">
-          <div>${getForecastDay(forecast.dt * 1000)}</div>
-          <div> <span>${Math.round(forecast.temp.max)}</span>°</div>
-          <div><img src="http://openweathermap.org/img/wn/${
-            forecast.weather[0].icon
-          }@2x.png"></div>
-          <div><span>${Math.round(forecast.temp.min)}</span>°</div> 
-      </div>
-      `;
-  }
 }
 
 function getFahrenheit(event) {
   event.preventDefault();
   fahrenheitLink.classList.add("active");
-
+  fahrenheitLink.classList.remove("not-active");
   celsiusLink.classList.remove("active");
   celsiusLink.classList.add("not-active");
 
