@@ -3,6 +3,7 @@ body {
   text-shadow: 2px 2px 3px rgba(158, 100, 100, 0.2);
   background-color: rgba(164, 166, 173, 0.5);
   color: #2d2b2b;
+  font-weight: 600;
 }
 .weather-app {
   border: 2px solid gray;
@@ -24,13 +25,14 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   padding: 5px;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
   text-transform: capitalize;
+  border-radius: 5px;
 }
 
 #submit {
   border-radius: 10px;
-  border: 1px solid white;
+  border: 1px solid black;
   background-color: #f3c623;
   padding: 5px;
   margin: auto 5px;
@@ -63,6 +65,8 @@ hr {
   color: #f3c623;
   font-size: 30px;
   margin: 12px auto auto;
+  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
+    -1px -1px 0 #000;
 }
 #last-updated {
   text-align: center;
@@ -98,6 +102,8 @@ h3 {
 }
 .not-active {
   color: #f3c623;
+  text-shadow: -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000, 0.5px -0.5px 0 #000,
+    -0.5px -0.5px 0 #000;
 }
 .active:hover {
   color: black;
@@ -106,8 +112,9 @@ h3 {
 
 #icon {
   position: relative;
-  bottom: 20px;
+  bottom: 50px;
   width: 100px;
+  margin-bottom: 15px;
 }
 
 .current-condition {
@@ -115,14 +122,42 @@ h3 {
   position: relative;
   bottom: 30px;
   margin: 0 auto 20px;
+  color: #f3c623;
+  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
+    -1px -1px 0 #000;
+}
+.low {
+  position: relative;
+  left: 30px;
+}
+.high {
+  position: relative;
+  right: 30px;
 }
 
-.conditions {
+.wind {
   position: relative;
-  bottom: 120px;
-  font-size: 15px;
+  left: 60px;
+}
+.humidity {
+  position: relative;
+  right: 60px;
+}
+.high,
+.low {
+  bottom: 150px;
+}
+.humidity,
+.wind {
+  bottom: 140px;
+}
+.conditions {
+  font-size: 20px;
   line-height: 3;
   text-align: center;
+}
+.conditions .fas {
+  color: #900d0d;
 }
 
 .forecast {
