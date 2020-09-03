@@ -47,7 +47,7 @@ function getPosition(position) {
   let lon = position.coords.longitude;
   let units = "imperial";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
-  axios.get(apiUrl).then(getWeather).then(getLocalTime);
+  axios.get(apiUrl).then(getWeather);
 }
 
 function searchCity(city) {
@@ -57,7 +57,7 @@ function searchCity(city) {
 }
 function searchZip(zip) {
   let units = "imperial";
-  let apiUrl = `api.openweathermap.org/data/2.5/weather?zip = ${zipcode}, ${countrycode}&appid=${apiUrl}&units=${units}`;
+  let apiUrl = `api.openweathermap.org/data/2.5/weather?zip = ${zipcode},${statecode},${countrycode}&appid=${apiUrl}&units=${units}`;
   axios.get(apiUrl).then(getWeather);
 }
 
@@ -73,6 +73,7 @@ function getCity(event) {
 }
 
 function getWeather(response) {
+  console.log(response.data);
   fahrenheitTemperature = response.data.main.temp;
   document.querySelector("#current-temp").innerHTML = Math.round(
     fahrenheitTemperature
