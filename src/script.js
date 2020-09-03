@@ -82,12 +82,7 @@ function getWeather(response) {
   document.querySelector(
     "h1"
   ).innerHTML = `${response.data.name}, ${response.data.sys.country}`;
-  document.querySelector("#current-high").innerHTML = Math.round(
-    response.data.main.temp_max
-  );
-  document.querySelector("#current-low").innerHTML = Math.round(
-    response.data.main.temp_min
-  );
+
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
   );
@@ -121,18 +116,29 @@ function getForecast(response) {
   let forecastElement = document.querySelector(".forecast");
   forecastElement.innerHTML = null;
   let forecast = null;
+
+  document.querySelector("#current-high").innerHTML = Math.round(
+    response.data.daily[0].temp.max
+  );
+  document.querySelector("#current-low").innerHTML = Math.round(
+    response.data.daily[0].temp.min
+  );
+
   for (let index = 1; index < 6; index++) {
     forecast = response.data.daily[index];
+    forecastFahrenheitHigh = forecast.temp.max;
+    forecastFahrenheitLow = forecast.temp.min;
+
     forecastElement.innerHTML += `<div class="col col-xs-1">
           <div>${getForecastDay(forecast.dt * 1000)}</div>
           <div> <span class="forecast-high">${Math.round(
-            forecast.temp.max
+            forecastFahrenheitHigh
           )}</span>°</div>
           <div><img src="http://openweathermap.org/img/wn/${
             forecast.weather[0].icon
           }@2x.png"></div>
           <div><span class="forecast-low">${Math.round(
-            forecast.temp.min
+            forecastFahrenheitLow
           )}</span>°</div> 
       </div>
     `;
@@ -145,8 +151,8 @@ function getCelsius(event) {
   fahrenheitLink.classList.remove("active");
   fahrenheitLink.classList.add("not-active");
   celsiusLink.classList.remove("not-active");
-
   let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
+
   document.querySelector("#current-temp").innerHTML = Math.round(
     celsiusTemperature
   );
@@ -184,6 +190,7 @@ function getFahrenheit(event) {
   document.querySelector("#current-temp").innerHTML = Math.round(
     fahrenheitTemperature
   );
+
   let high = document.querySelectorAll(".forecast-high");
   let low = document.querySelectorAll(".forecast-low");
   high.forEach(function (high) {
@@ -194,6 +201,7 @@ function getFahrenheit(event) {
     let currentTemp = low.innerHTML;
     low.innerHTML = `${Math.round((currentTemp * 9) / 5 + 32)}`;
   });
+
   let fahrenheitHigh = document.querySelector("#current-high");
   let fahrenheitLow = document.querySelector("#current-low");
   let currentHigh = fahrenheitHigh.innerHTML;
@@ -222,6 +230,7 @@ let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", getFahrenheit);
 
 let fahrenheitTemperature = null;
-let forecastFahrenheit = null;
+let forecastFahrenheitHigh = null;
+let forecastFahrenheitLow = null;
 
 searchCity("Tokyo");
