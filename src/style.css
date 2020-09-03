@@ -26,7 +26,6 @@ body {
   color: white;
   padding: 5px;
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
-  text-transform: capitalize;
   border-radius: 5px;
 }
 
@@ -97,7 +96,7 @@ h3 {
 }
 
 .active {
-  color: black;
+  color: #2d2b2b;
   cursor: default;
 }
 .not-active {
