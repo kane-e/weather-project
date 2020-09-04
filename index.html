@@ -10,7 +10,8 @@
 
 <link rel="stylesheet" href="src/style.css" />
 <link href="https://fonts.googleapis.com/css2?family=Hind&display=swap" rel="stylesheet">
-
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+  crossorigin="anonymous"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <title>WeatherNow</title>
 </head>
@@ -18,24 +19,19 @@
 <body>
     <div class="container">
       <div class="wrapper">
+        
         <div class="weather-app">
+          <h3 class= "date-time"><span id="date-time"> </span></h3>
+            <hr>
             
             <form class="search-form">
-
                 <input type="text" placeholder="Enter City or ZIP, CC" spellcheck= "false" autocomplete="off" autofocus="on"
                     id="search-input" />
                 <input type="submit" value="Search" id="submit" />
                 <button id="location-button"><i class="fas fa-map-marker-alt"></i></button>
-
             </form>
-            
-            <hr>
 
               <h1 id="city"> </h1>
-
-            <div id="last-updated" >Last Updated</div>
-            <h3><span id="date-time">  </span></h3>
-
               
                 <div class="row current-temp">
                     <div class="col-8 text-right">

@@ -15,10 +15,15 @@ body {
   cursor: default;
   background-image: linear-gradient(-225deg, #7085b6 0%, #87a7d9 90%);
 }
-
+.date-time {
+  text-align: center;
+  margin: 20px auto 5px;
+  font-size: 17px;
+  color: #f3c623;
+}
 .search-form {
   text-align: center;
-  margin: 10px auto;
+  margin: 20px auto;
   font-size: 15px;
 }
 #search-input {
@@ -56,7 +61,7 @@ body {
 hr {
   border: 1px dotted rgba(243, 198, 35, 0.6);
   width: 100%;
-  margin: 0 auto 5px;
+  margin: 0;
 }
 
 #city {
@@ -64,25 +69,13 @@ hr {
   color: #f3c623;
   font-size: 30px;
   margin: 12px auto auto;
-  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
-    -1px -1px 0 #000;
-}
-#last-updated {
-  text-align: center;
-  font-size: 10px;
-  margin: 0 auto 5px;
-}
-h3 {
-  text-align: center;
-  margin: 0 auto 30px;
-  font-size: 17px;
+  text-shadow: -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000, 0.5px -0.5px 0 #000,
+    -0.5px -0.5px 0 #000;
 }
 
 .current-temp {
   text-align: center;
   margin-right: 0;
-  position: relative;
-  bottom: 25px;
 }
 
 #current-temp {
@@ -92,7 +85,7 @@ h3 {
 .current-unit {
   font-size: 18px;
   position: relative;
-  bottom: 22px;
+  bottom: 18px;
 }
 
 .active {
@@ -105,25 +98,21 @@ h3 {
     -0.5px -0.5px 0 #000;
 }
 .active:hover {
-  color: black;
+  color: #2d2b2b;
   text-decoration: none;
 }
 
 #icon {
-  position: relative;
-  bottom: 50px;
-  width: 100px;
+  width: 110px;
   margin-bottom: 15px;
+  position: relative;
+  bottom: 20px;
 }
 
 .current-condition {
   font-size: 22px;
-  position: relative;
-  bottom: 30px;
-  margin: 0 auto 20px;
+  margin: 0 auto;
   color: #f3c623;
-  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
-    -1px -1px 0 #000;
 }
 .low {
   position: relative;
@@ -144,11 +133,11 @@ h3 {
 }
 .high,
 .low {
-  bottom: 150px;
+  bottom: 120px;
 }
 .humidity,
 .wind {
-  bottom: 140px;
+  bottom: 110px;
 }
 .conditions {
   font-size: 20px;
@@ -162,14 +151,13 @@ h3 {
 .forecast {
   font-size: 17px;
   margin: 0 30px;
-
   position: relative;
-  bottom: 90px;
+  bottom: 80px;
   border: 1px solid transparent;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
-
   border-radius: 5px;
 }
+
 .forecast img {
   width: 52px;
 }
