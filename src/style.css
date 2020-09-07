@@ -162,6 +162,19 @@ hr {
   width: 52px;
 }
 
+.error {
+  color: #900d0d;
+
+  text-shadow: none;
+  text-align: center;
+  margin-top: 25px;
+  font-size: 25px;
+}
+#code-by {
+  position: fixed;
+  bottom: 0;
+}
+
 @media screen and (max-width: 480px) and (orientation: portrait) {
   .weather-app {
     width: 100%;
