@@ -47,29 +47,66 @@ function getPosition(position) {
   let lon = position.coords.longitude;
   let units = "imperial";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&appid=${apiKey}`;
-  axios.get(apiUrl).then(getWeather);
+  axios
+    .get(apiUrl)
+    .then(getWeather)
+    .catch((err) => handleError(err));
 }
 
 function searchCity(city) {
   let units = "imperial";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-  axios.get(apiUrl).then(getWeather);
+  axios
+    .get(apiUrl)
+    .then(getWeather)
+    .catch((err) => handleError(err));
 }
-function searchZip(zip) {
+
+function searchZip(zip, countryCode) {
   let units = "imperial";
-  let apiUrl = `api.openweathermap.org/data/2.5/weather?zip = ${zipcode},${statecode},${countrycode}&appid=${apiUrl}&units=${units}`;
-  axios.get(apiUrl).then(getWeather);
+  let apiUrl = `api.openweathermap.org/data/2.5/weather?zip=${
+    (zip, countryCode)
+  }&appid=${apiKey}&units=${units}`;
+
+  axios
+    .get(apiUrl)
+    .then(getWeather)
+    .catch((err) => handleError(err));
 }
 
 function getCity(event) {
   event.preventDefault();
-  let cityInput = document.querySelector("#search-input");
-  if (isNaN(cityInput.value)) {
-    searchCity();
+  let searchInput = document.querySelector("#search-input");
+
+  let searchArray = searchInput.value.split(",");
+  //test for zip,country
+  if (!isNaN(searchInput)) {
+    searchZip(searchInput, "");
+  } else if (searchArray.length == 2 && Number.isInteger(searchArray[0])) {
+    // zipcode and country
+    searchZip(searchArray[0], searchArray(1));
   } else {
-    searchZip;
+    //assume city
+    searchCity(searchInput.value);
   }
-  searchCity(cityInput.value);
+  //searchCity(cityInput.value);
+  // this is a comment
+}
+
+function handleError(err) {
+  if (err != null && err.response.status == 404) {
+    document.querySelector(
+      ".error-wrapper"
+    ).innerHTML = `<div  class="error" aria-hidden="true">
+         Couldn't find that! Please try again.<div> 🙈</div>
+      </div>`;
+  } else {
+    document.querySelector(
+      ".error-wrapper"
+    ).innerHTML = `<div  class="error" aria-hidden="true">
+         Some other error
+      </div>`;
+  }
 }
 
 function getWeather(response) {
@@ -218,7 +255,7 @@ function getFahrenheit(event) {
 let apiKey = "0d71af642be5de39b82dbc1fda436287";
 
 let searchForm = document.querySelector(".search-form");
-searchForm.addEventListener("click", getCity);
+searchForm.addEventListener("submit", getCity);
 
 let locationButton = document.querySelector("#location-button");
 locationButton.addEventListener("click", runGeo);
