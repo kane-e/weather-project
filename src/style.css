@@ -21,6 +21,7 @@ body {
   font-size: 17px;
   color: #f3c623;
 }
+
 .search-form {
   text-align: center;
   margin: 20px auto;
@@ -51,7 +52,8 @@ body {
 #submit:hover {
   background-color: #d6ae20;
 }
-#location-button {
+#location-button,
+#random-button {
   background-color: transparent;
   color: #900d0d;
   border: none;
