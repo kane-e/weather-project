@@ -177,6 +177,39 @@ hr {
   bottom: 0;
 }
 
+#location-message {
+  display: none;
+  position: absolute;
+  top: 72px;
+  right: 265px;
+  font-size: 10px;
+  transition: all 300ms ease-in-out;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background-color: ghostwhite;
+  color: black;
+}
+
+#location-button:hover + #location-message {
+  display: inline;
+}
+#random-message {
+  display: none;
+  position: absolute;
+  top: 72px;
+  right: 225px;
+  font-size: 10px;
+  transition: all 300ms ease-in-out;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background-color: ghostwhite;
+  color: black;
+}
+
+#random-button:hover + #random-message {
+  display: inline;
+}
+
 @media screen and (max-width: 480px) and (orientation: portrait) {
   .weather-app {
     width: 100%;
