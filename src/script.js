@@ -61,6 +61,33 @@ function searchCity(city) {
     .then(getWeather)
     .catch((err) => handleError(err));
 }
+function searchRandomCity(event) {
+  let count = 0;
+  while (count < 10) {
+    getRandomCity();
+    count++;
+  }
+}
+function getRandomCity() {
+  let cities = [
+    "London",
+    "New York",
+    "Sao Paulo",
+    "Moscow",
+    "Lima",
+    "Madrid",
+    "Seoul",
+    "Jakarta",
+    "Cairo",
+  ];
+
+  let randomCity = Math.floor(Math.random() * 10);
+  let city = (randomCity, cities[randomCity]);
+
+  let units = "imperial";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(getWeather);
+}
 
 function searchZip(zip, countryCode) {
   let units = "imperial";
@@ -258,6 +285,9 @@ searchForm.addEventListener("submit", getCity);
 
 let locationButton = document.querySelector("#location-button");
 locationButton.addEventListener("click", runGeo);
+
+let randomButton = document.querySelector("#random-button");
+randomButton.addEventListener("click", searchRandomCity);
 
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", getCelsius);
