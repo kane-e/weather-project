@@ -89,8 +89,6 @@ function getCity(event) {
     //assume city
     searchCity(searchInput.value);
   }
-  //searchCity(cityInput.value);
-  // this is a comment
 }
 
 function handleError(err) {
@@ -99,12 +97,6 @@ function handleError(err) {
       ".error-wrapper"
     ).innerHTML = `<div  class="error" aria-hidden="true">
          Couldn't find that! Please try again.<div> 🙈</div>
-      </div>`;
-  } else {
-    document.querySelector(
-      ".error-wrapper"
-    ).innerHTML = `<div  class="error" aria-hidden="true">
-         Some other error
       </div>`;
   }
 }
@@ -120,8 +112,9 @@ function getWeather(response) {
     "h1"
   ).innerHTML = `${response.data.name}, ${response.data.sys.country}`;
 
-  mileSpeed = response.data.wind.speed;
-  document.querySelector("#wind").innerHTML = Math.round(mileSpeed);
+  document.querySelector("#wind").innerHTML = Math.round(
+    response.data.wind.speed
+  );
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector(".current-condition").innerHTML =
     response.data.weather[0].main;
@@ -189,13 +182,16 @@ function getCelsius(event) {
   fahrenheitLink.classList.remove("active");
   fahrenheitLink.classList.add("not-active");
   celsiusLink.classList.remove("not-active");
+  fahrenheitLink.addEventListener("click", getFahrenheit);
+  celsiusLink.removeEventListener("click", getCelsius);
 
   let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
-  let forecastCelsiusHigh = (forecastFahrenheitHigh - 32) * (5 / 9);
-  let forecastCelsiusLow = (forecastFahrenheitLow - 32) * (5 / 9);
   let currentCelsiusHigh = (currentFahrenheitHigh - 32) * (5 / 9);
   let currentCelsiusLow = (currentFahrenheitLow - 32) * (5 / 9);
-  let kilometerSpeed = mileSpeed * 1.6;
+  let celsiusHigh = document.querySelector("#current-high");
+  let celsiusLow = document.querySelector("#current-low");
+  celsiusHigh.innerHTML = `${Math.round(currentCelsiusHigh)}`;
+  celsiusLow.innerHTML = `${Math.round(currentCelsiusLow)}`;
 
   document.querySelector("#current-temp").innerHTML = Math.round(
     celsiusTemperature
@@ -203,20 +199,19 @@ function getCelsius(event) {
   let high = document.querySelectorAll(".forecast-high");
   let low = document.querySelectorAll(".forecast-low");
   high.forEach(function (high) {
+    let forecastCelsiusHigh = (high.innerHTML - 32) * (5 / 9);
     high.innerHTML = `${Math.round(forecastCelsiusHigh)}`;
   });
   low.forEach(function (low) {
+    let forecastCelsiusLow = (low.innerHTML - 32) * (5 / 9);
     low.innerHTML = `${Math.round(forecastCelsiusLow)}`;
   });
 
-  let celsiusHigh = document.querySelector("#current-high");
-  let celsiusLow = document.querySelector("#current-low");
-  celsiusHigh.innerHTML = `${Math.round(currentCelsiusHigh)}`;
-  celsiusLow.innerHTML = `${Math.round(currentCelsiusLow)}`;
+  let wind = document.querySelector("#wind");
+  let kilometerSpeed = wind.innerHTML * 1.6;
+  wind.innerHTML = `${Math.round(kilometerSpeed)}`;
 
-  let windSpeed = document.querySelector("#wind");
   let windUnit = document.querySelector("#wind-unit");
-  windSpeed.innerHTML = `${Math.round(kilometerSpeed)}`;
   windUnit.innerHTML = " kph";
 }
 
@@ -226,29 +221,33 @@ function getFahrenheit(event) {
   fahrenheitLink.classList.remove("not-active");
   celsiusLink.classList.remove("active");
   celsiusLink.classList.add("not-active");
+  fahrenheitLink.removeEventListener("click", getFahrenheit);
+  celsiusLink.addEventListener("click", getCelsius);
 
   document.querySelector("#current-temp").innerHTML = Math.round(
     fahrenheitTemperature
   );
-  let high = document.querySelectorAll(".forecast-high");
-  let low = document.querySelectorAll(".forecast-low");
-  high.forEach(function (high) {
-    high.innerHTML = `${Math.round(forecastFahrenheitHigh)}`;
-  });
-  low.forEach(function (low) {
-    low.innerHTML = `${Math.round(forecastFahrenheitLow)}`;
-  });
-
   let fahrenheitHigh = document.querySelector("#current-high");
   let fahrenheitLow = document.querySelector("#current-low");
-
   fahrenheitHigh.innerHTML = `${Math.round(currentFahrenheitHigh)}`;
   fahrenheitLow.innerHTML = `${Math.round(currentFahrenheitLow)}`;
 
-  let mileSpeed = document.querySelector("#wind");
-  let windUnit = document.querySelector("#wind-unit");
+  let high = document.querySelectorAll(".forecast-high");
+  let low = document.querySelectorAll(".forecast-low");
+  high.forEach(function (high) {
+    let forecastFahrenheitHigh = high.innerHTML;
+    high.innerHTML = `${Math.round((forecastFahrenheitHigh * 9) / 5 + 32)}`;
+  });
+  low.forEach(function (low) {
+    let forecastFahrenheitLow = low.innerHTML;
+    low.innerHTML = `${Math.round((forecastFahrenheitLow * 9) / 5 + 32)}`;
+  });
 
-  mileSpeed.innerHTML = `${Math.round(mileSpeed)}`;
+  let wind = document.querySelector("#wind");
+  let mileSpeed = wind.innerHTML / 1.6;
+  wind.innerHTML = `${Math.round(mileSpeed)}`;
+
+  let windUnit = document.querySelector("#wind-unit");
   windUnit.innerHTML = " mph";
 }
 
@@ -264,13 +263,11 @@ let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", getCelsius);
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", getFahrenheit);
 
 let fahrenheitTemperature = null;
 let forecastFahrenheitHigh = null;
 let forecastFahrenheitLow = null;
 let currentFahrenheitHigh = null;
 let currentFahrenheitLow = null;
-let mileSpeed = null;
 
 searchCity("Tokyo");
