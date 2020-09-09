@@ -164,13 +164,19 @@ hr {
   width: 52px;
 }
 
-.error {
+#error {
   color: #900d0d;
-
   text-shadow: none;
   text-align: center;
-  margin-top: 25px;
+  margin-top: 35px;
+  margin-left: 55px;
   font-size: 25px;
+  width: 80%;
+}
+#reload {
+  background-color: transparent;
+  font-size: 100px;
+  border: none;
 }
 #code-by {
   position: fixed;
@@ -197,7 +203,7 @@ hr {
   display: none;
   position: absolute;
   top: 72px;
-  right: 225px;
+  right: 210px;
   font-size: 10px;
   transition: all 300ms ease-in-out;
   border: 1px solid transparent;
