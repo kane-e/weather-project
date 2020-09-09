@@ -26,12 +26,14 @@ body {
   text-align: center;
   margin: 20px auto;
   font-size: 15px;
+  margin-bottom: 15px;
+  margin-top: 22px;
 }
 #search-input {
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   padding: 5px;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
 }
 
@@ -70,7 +72,7 @@ hr {
   text-align: center;
   color: #f3c623;
   font-size: 30px;
-  margin: 12px auto auto;
+
   text-shadow: -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000, 0.5px -0.5px 0 #000,
     -0.5px -0.5px 0 #000;
 }
@@ -184,20 +186,22 @@ hr {
 }
 
 #location-message {
-  display: none;
+  visibility: hidden;
   position: absolute;
   top: 72px;
   right: 265px;
   font-size: 10px;
-  transition: all 300ms ease-in-out;
+  transition: all 150ms ease-in-out;
   border: 1px solid transparent;
   border-radius: 5px;
   background-color: ghostwhite;
   color: black;
+  padding: 1px;
+  opacity: 0.75;
 }
 
 #location-button:hover + #location-message {
-  display: inline;
+  visibility: visible;
 }
 #random-message {
   display: none;
@@ -205,11 +209,14 @@ hr {
   top: 72px;
   right: 210px;
   font-size: 10px;
-  transition: all 300ms ease-in-out;
+  transition: all 200ms ease-in-out;
   border: 1px solid transparent;
   border-radius: 5px;
   background-color: ghostwhite;
+
   color: black;
+  padding: 1px;
+  opacity: 0.75;
 }
 
 #random-button:hover + #random-message {
