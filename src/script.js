@@ -61,14 +61,8 @@ function searchCity(city) {
     .then(getWeather)
     .catch((err) => handleError(err));
 }
+
 function searchRandomCity(event) {
-  let count = 0;
-  while (count < 10) {
-    getRandomCity();
-    count++;
-  }
-}
-function getRandomCity() {
   let cities = [
     "London",
     "New York",
@@ -120,10 +114,13 @@ function getCity(event) {
 
 function handleError(err) {
   if (err != null && err.response.status == 404) {
+    document
+      .querySelector(".error-wrapper")
+      .addEventListener("click", function () {});
     document.querySelector(
       ".error-wrapper"
-    ).innerHTML = `<div  class="error" aria-hidden="true">
-         Couldn't find that! Please try again.<div> 🙈</div>
+    ).innerHTML = `<div  id="error" aria-hidden="true">
+         Couldn't find that!<br> Click on the monkey to search again.<div><button onClick="window.location.reload();" id="reload"> 🙈</button></div>
       </div>`;
   }
 }
@@ -276,6 +273,11 @@ function getFahrenheit(event) {
 
   let windUnit = document.querySelector("#wind-unit");
   windUnit.innerHTML = " mph";
+}
+function randomButtonText(event) {
+  document.querySelector(
+    "#location-button"
+  ).innerHTML = `<span aria-hidden="true" class="random-button-text">Search random city</span>`;
 }
 
 let apiKey = "0d71af642be5de39b82dbc1fda436287";
