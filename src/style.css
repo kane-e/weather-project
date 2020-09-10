@@ -22,20 +22,23 @@ body {
   color: #f3c623;
 }
 .greeting {
-  animation: fadeout 0.5s 2.5s;
+  -webkit-animation: fadeout 0.5s 3s;
+  animation: fadeout 0.5s 3s;
   min-width: 160px;
   height: 30px;
   margin-left: -125px;
   text-align: center;
   position: fixed;
+  border: none;
   z-index: 1;
   left: 55%;
   top: 30px;
   font-size: 17px;
   font-weight: 300px;
   border-radius: 5px;
-  background-color: #2d2b2b;
+  background-color: #900d0d;
   color: #f3c623;
+  padding-top: 6px;
 }
 
 /* seach bar */

@@ -152,7 +152,7 @@ function getWeather(response) {
   document.querySelector("#date-time").innerHTML = formatDate(
     response.data.dt * 1000
   );
-  //hide greeting
+  // hide greeting
   setTimeout(function () {
     document.querySelector(".greeting").classList.add("hide");
   }, 3000);
