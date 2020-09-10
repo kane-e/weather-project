@@ -30,6 +30,14 @@ function formatHours(timestamp) {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
+  let greeting = document.querySelector(".greeting");
+  if (hours < 12) {
+    greeting.innerHTML = "Good Morning";
+  } else if (hours > 11 && hours < 18) {
+    greeting.innerHTML = "Good Afternoon";
+  } else {
+    greeting.innerHTML = "Good Evening";
+  }
 
   return date.toLocaleString("en-US", {
     hour: "numeric",
@@ -39,6 +47,7 @@ function formatHours(timestamp) {
 }
 
 function runGeo() {
+  // retrieves current coordinates
   navigator.geolocation.getCurrentPosition(getPosition);
 }
 
@@ -56,10 +65,7 @@ function getPosition(position) {
 function searchCity(city) {
   let units = "imperial";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-  axios
-    .get(apiUrl)
-    .then(getWeather)
-    .catch((err) => handleError(err));
+  axios.get(apiUrl).then(getWeather);
 }
 
 function searchRandomCity(event) {
@@ -127,6 +133,7 @@ function handleError(err) {
 
 function getWeather(response) {
   console.log(response.data);
+  // current conditions
   fahrenheitTemperature = response.data.main.temp;
   document.querySelector("#current-temp").innerHTML = Math.round(
     fahrenheitTemperature
@@ -142,21 +149,22 @@ function getWeather(response) {
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector(".current-condition").innerHTML =
     response.data.weather[0].main;
-  let timeObject = JSON.parse("formatDate(response.data.dt * 1000)");
-  console.log(timeObject);
+  document.querySelector("#date-time").innerHTML = formatDate(
+    response.data.dt * 1000
+  );
+  //hide greeting
   setTimeout(function () {
-    document.querySelector("#date-time").innerHTML = formatDate(
-      response.data.dt * 1000
-    );
+    document.querySelector(".greeting").classList.add("hide");
   }, 3000);
 
+  // set current icon
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
-
+  // retrieve forecast api
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&
@@ -175,15 +183,17 @@ function getForecast(response) {
   forecastElement.innerHTML = null;
   let forecast = null;
 
-  document.querySelector("#current-high").innerHTML = Math.round(
-    response.data.daily[0].temp.max
-  );
-  document.querySelector("#current-low").innerHTML = Math.round(
-    response.data.daily[0].temp.min
-  );
+  // set current high and current low
   currentFahrenheitHigh = response.data.daily[0].temp.max;
   currentFahrenheitLow = response.data.daily[0].temp.min;
+  document.querySelector("#current-high").innerHTML = Math.round(
+    currentFahrenheitHigh
+  );
+  document.querySelector("#current-low").innerHTML = Math.round(
+    currentFahrenheitLow
+  );
 
+  //display forecast
   for (let index = 1; index < 6; index++) {
     forecast = response.data.daily[index];
     forecastFahrenheitHigh = forecast.temp.max;
@@ -213,7 +223,7 @@ function getCelsius(event) {
   celsiusLink.classList.remove("not-active");
   fahrenheitLink.addEventListener("click", getFahrenheit);
   celsiusLink.removeEventListener("click", getCelsius);
-
+  // current temperature conversions
   let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
   let currentCelsiusHigh = (currentFahrenheitHigh - 32) * (5 / 9);
   let currentCelsiusLow = (currentFahrenheitLow - 32) * (5 / 9);
@@ -221,10 +231,10 @@ function getCelsius(event) {
   let celsiusLow = document.querySelector("#current-low");
   celsiusHigh.innerHTML = `${Math.round(currentCelsiusHigh)}`;
   celsiusLow.innerHTML = `${Math.round(currentCelsiusLow)}`;
-
   document.querySelector("#current-temp").innerHTML = Math.round(
     celsiusTemperature
   );
+  // forecast conversions
   let high = document.querySelectorAll(".forecast-high");
   let low = document.querySelectorAll(".forecast-low");
   high.forEach(function (high) {
@@ -235,7 +245,7 @@ function getCelsius(event) {
     let forecastCelsiusLow = (low.innerHTML - 32) * (5 / 9);
     low.innerHTML = `${Math.round(forecastCelsiusLow)}`;
   });
-
+  //wind conversion
   let wind = document.querySelector("#wind");
   let kilometerSpeed = wind.innerHTML * 1.6;
   wind.innerHTML = `${Math.round(kilometerSpeed)}`;
@@ -252,7 +262,7 @@ function getFahrenheit(event) {
   celsiusLink.classList.add("not-active");
   fahrenheitLink.removeEventListener("click", getFahrenheit);
   celsiusLink.addEventListener("click", getCelsius);
-
+  //current temperature conversions
   document.querySelector("#current-temp").innerHTML = Math.round(
     fahrenheitTemperature
   );
@@ -260,7 +270,7 @@ function getFahrenheit(event) {
   let fahrenheitLow = document.querySelector("#current-low");
   fahrenheitHigh.innerHTML = `${Math.round(currentFahrenheitHigh)}`;
   fahrenheitLow.innerHTML = `${Math.round(currentFahrenheitLow)}`;
-
+  //forecast conversions
   let high = document.querySelectorAll(".forecast-high");
   let low = document.querySelectorAll(".forecast-low");
   high.forEach(function (high) {
@@ -271,11 +281,10 @@ function getFahrenheit(event) {
     let forecastFahrenheitLow = low.innerHTML;
     low.innerHTML = `${Math.round((forecastFahrenheitLow * 9) / 5 + 32)}`;
   });
-
+  //wind conversion
   let wind = document.querySelector("#wind");
   let mileSpeed = wind.innerHTML / 1.6;
   wind.innerHTML = `${Math.round(mileSpeed)}`;
-
   let windUnit = document.querySelector("#wind-unit");
   windUnit.innerHTML = " mph";
 }

@@ -21,7 +21,24 @@ body {
   font-size: 17px;
   color: #f3c623;
 }
+.greeting {
+  animation: fadeout 0.5s 2.5s;
+  min-width: 155px;
+  height: 30px;
+  margin-left: -125px;
+  text-align: center;
+  position: fixed;
+  z-index: 1;
+  left: 55%;
+  top: 30px;
+  font-size: 17px;
+  font-weight: 300px;
+  border-radius: 5px;
+  background-color: #2d2b2b;
+  color: #f3c623;
+}
 
+/* seach bar */
 .search-form {
   text-align: center;
   margin: 20px auto;
@@ -59,7 +76,7 @@ body {
   background-color: transparent;
   color: #900d0d;
   border: none;
-  font-size: 25px;
+  font-size: 22px;
 }
 
 hr {
@@ -68,6 +85,7 @@ hr {
   margin: 0;
 }
 
+/* current location */
 #city {
   text-align: center;
   color: #f3c623;
@@ -151,7 +169,7 @@ hr {
 .conditions .fas {
   color: #900d0d;
 }
-
+/* forecast */
 .forecast {
   font-size: 17px;
   margin: 0 30px;
@@ -165,7 +183,7 @@ hr {
 .forecast img {
   width: 52px;
 }
-
+/* error page */
 #error {
   color: #900d0d;
   text-shadow: none;
@@ -184,7 +202,7 @@ hr {
   position: fixed;
   bottom: 0;
 }
-
+/* button hover message*/
 #location-message {
   visibility: hidden;
   position: absolute;
@@ -197,7 +215,7 @@ hr {
   background-color: ghostwhite;
   color: black;
   padding: 1px;
-  opacity: 0.75;
+  opacity: 0.9;
 }
 
 #location-button:hover + #location-message {
@@ -216,30 +234,13 @@ hr {
 
   color: black;
   padding: 1px;
-  opacity: 0.75;
+  opacity: 0.9;
 }
 
 #random-button:hover + #random-message {
   display: inline;
 }
 
-.snackbar {
-  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  animation: fadein 0.5s, fadeout 0.5s 2.5s;
-  min-width: 250px;
-  margin-left: -125px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 2px;
-  padding: 5px;
-  position: fixed;
-  z-index: 1;
-  left: 50%;
-  top: 30px;
-  font-size: 17px;
-  border-radius: 5px;
-}
 .hide {
   display: none;
 }
