@@ -23,7 +23,7 @@ body {
 }
 .greeting {
   animation: fadeout 0.5s 2.5s;
-  min-width: 155px;
+  min-width: 160px;
   height: 30px;
   margin-left: -125px;
   text-align: center;
@@ -170,11 +170,16 @@ hr {
   color: #900d0d;
 }
 /* forecast */
+.forecast-choice {
+  position: relative;
+  bottom: 110px;
+  left: 30px;
+}
 .forecast {
   font-size: 17px;
   margin: 0 30px;
   position: relative;
-  bottom: 80px;
+  bottom: 100px;
   border: 1px solid transparent;
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
   border-radius: 5px;
