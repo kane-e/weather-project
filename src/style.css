@@ -24,14 +24,14 @@ body {
 .greeting {
   -webkit-animation: fadeout 0.5s 3s;
   animation: fadeout 0.5s 3s;
-  width: 25%;
+  min-width: 180px;
   height: 30px;
-  margin-left: -125px;
+  margin-left: 160px;
   text-align: center;
   position: fixed;
   border: none;
   z-index: 1;
-  left: 55%;
+
   top: 30px;
   font-size: 17px;
   font-weight: 300px;
