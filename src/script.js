@@ -120,8 +120,8 @@ function handleError(err) {
     document.querySelector(
       ".error-wrapper"
     ).innerHTML = `<div  id="error" aria-hidden="true">
-         Couldn't find that!<br> Click on the monkey to search again.<div><button onClick="window.location.reload();" id="reload"> 🙈</button></div>
-      </div>`;
+ Couldn't find that!<br> Click on the monkey to search again.<div><button onClick="window.location.reload();" id="reload"> 🙈</button></div>
+</div>`;
   }
 }
 
@@ -142,9 +142,13 @@ function getWeather(response) {
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   document.querySelector(".current-condition").innerHTML =
     response.data.weather[0].main;
-  document.querySelector("#date-time").innerHTML = formatDate(
-    response.data.dt * 1000
-  );
+  let timeObject = JSON.parse("formatDate(response.data.dt * 1000)");
+  console.log(timeObject);
+  setTimeout(function () {
+    document.querySelector("#date-time").innerHTML = formatDate(
+      response.data.dt * 1000
+    );
+  }, 3000);
 
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
@@ -152,6 +156,7 @@ function getWeather(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&
@@ -273,11 +278,6 @@ function getFahrenheit(event) {
 
   let windUnit = document.querySelector("#wind-unit");
   windUnit.innerHTML = " mph";
-}
-function randomButtonText(event) {
-  document.querySelector(
-    "#location-button"
-  ).innerHTML = `<span aria-hidden="true" class="random-button-text">Search random city</span>`;
 }
 
 let apiKey = "0d71af642be5de39b82dbc1fda436287";
