@@ -25,13 +25,12 @@ body {
   -webkit-animation: fadeout 0.5s 3s;
   animation: fadeout 0.5s 3s;
   min-width: 180px;
-  height: 30px;
+  height: 32px;
   margin-left: 160px;
   text-align: center;
   position: fixed;
   border: none;
   z-index: 1;
-
   top: 30px;
   font-size: 17px;
   font-weight: 300px;
@@ -173,7 +172,7 @@ hr {
   color: #900d0d;
 }
 /* forecast */
-.forecast-choice {
+.forecast-links {
   position: relative;
   bottom: 110px;
   left: 30px;

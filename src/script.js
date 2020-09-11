@@ -33,9 +33,11 @@ function formatHours(timestamp) {
   let greeting = document.querySelector(".greeting");
   if (hours < 12) {
     greeting.innerHTML = "Good Morning";
-  } else if (hours > 11 && hours < 18) {
+  }
+  if (hours >= 12 && hours <= 16) {
     greeting.innerHTML = "Good Afternoon";
-  } else {
+  }
+  if (hours >= 17) {
     greeting.innerHTML = "Good Evening";
   }
 
@@ -168,7 +170,7 @@ function getWeather(response) {
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&
-  exclude= minutely,hourly&appid=${apiKey}&units=imperial`;
+  exclude=minutely&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(getForecast);
 }
 function getForecastDay(timestamp) {
@@ -177,8 +179,18 @@ function getForecastDay(timestamp) {
   let day = days[dt.getDay()];
   return `${day}`;
 }
+
 function getForecast(response) {
   console.log(response.data);
+  event.preventDefault();
+  dailyLink.classList.add("active");
+
+  hourlyLink.classList.remove("active");
+  hourlyLink.classList.add("not-active");
+  dailyLink.classList.remove("not-active");
+  hourlyLink.addEventListener("click", getHourly);
+  dailyLink.removeEventListener("click", getForecast);
+
   let forecastElement = document.querySelector(".forecast");
   forecastElement.innerHTML = null;
   let forecast = null;
@@ -212,6 +224,36 @@ function getForecast(response) {
           )}</span>°</div> 
       </div>
     `;
+  }
+}
+
+function getHourly(response) {
+  event.preventDefault();
+  hourlyLink.classList.add("active");
+  dailyLink.classList.remove("active");
+  dailyLink.classList.add("not-active");
+  hourlyLink.classList.remove("not-active");
+
+  dailyLink.addEventListener("click", getForecast);
+  hourlyLink.removeEventListener("click", getHourly);
+
+  let forecastElement = document.querySelector(".forecast");
+  forecastElement.innerHTML = null;
+  let hourly = null;
+
+  for (let index = 1; index < 6; index++) {
+    hourly = response.data.hourly[index];
+    hourlyFahrenheit = hourly.temp;
+
+    forecastElement.innerHTML += `<div class="col col-xs-1 hide">
+          <div>${formatHours(hourly.dt * 1000)}</div>
+          <div> <span class="forecast-high">${Math.round(
+            hourlyFahrenheit
+          )}</span>°</div>
+          <div><img src="http://openweathermap.org/img/wn/${
+            hourly.weather[0].icon
+          }@2x.png"></div>
+          </div>`;
   }
 }
 
@@ -305,10 +347,17 @@ celsiusLink.addEventListener("click", getCelsius);
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 
+let hourlyLink = document.querySelector("#hourly-link");
+hourlyLink.addEventListener("click", getHourly);
+
+let dailyLink = document.querySelector("#daily-link");
+
 let fahrenheitTemperature = null;
 let forecastFahrenheitHigh = null;
 let forecastFahrenheitLow = null;
 let currentFahrenheitHigh = null;
 let currentFahrenheitLow = null;
+let hourlyFahrenheit = null;
+let hourly = null;
 
 searchCity("Tokyo");
