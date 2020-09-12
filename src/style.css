@@ -177,7 +177,8 @@ hr {
   bottom: 110px;
   left: 30px;
 }
-.forecast {
+.forecast,
+.hourly {
   font-size: 17px;
   margin: 0 30px;
   position: relative;
@@ -187,9 +188,11 @@ hr {
   border-radius: 5px;
 }
 
-.forecast img {
+.forecast img,
+.hourly img {
   width: 52px;
 }
+
 /* error page */
 #error {
   color: #900d0d;
