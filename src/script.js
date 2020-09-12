@@ -30,6 +30,16 @@ function formatHours(timestamp) {
   if (minutes < 10) {
     minutes = `0${minutes}`;
   }
+
+  return date.toLocaleString("en-US", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: true,
+  });
+}
+
+function greeting() {
+  let hours = new Date().getHours();
   let greeting = document.querySelector(".greeting");
   if (hours < 12) {
     greeting.innerHTML = "Good Morning";
@@ -40,12 +50,6 @@ function formatHours(timestamp) {
   if (hours >= 17) {
     greeting.innerHTML = "Good Evening";
   }
-
-  return date.toLocaleString("en-US", {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
-  });
 }
 
 function runGeo() {
