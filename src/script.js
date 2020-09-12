@@ -67,7 +67,10 @@ function getPosition(position) {
 function searchCity(city) {
   let units = "imperial";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-  axios.get(apiUrl).then(getWeather);
+  axios
+    .get(apiUrl)
+    .then(getWeather)
+    .catch((err) => handleError(err));
 }
 
 function searchRandomCity(event) {
@@ -293,6 +296,12 @@ function getCelsius(event) {
     let forecastCelsiusLow = (low.innerHTML - 32) * (5 / 9);
     low.innerHTML = `${Math.round(forecastCelsiusLow)}`;
   });
+
+  let hourlyHigh = document.querySelectorAll(".hourly-high");
+  hourlyHigh.forEach(function (hourlyHigh) {
+    let hourlyCelsiusHigh = (hourlyHigh.innerHTML - 32) * (5 / 9);
+    hourlyHigh.innerHTML = `${Math.round(hourlyCelsiusHigh)}`;
+  });
   //wind conversion
   let wind = document.querySelector("#wind");
   let kilometerSpeed = wind.innerHTML * 1.6;
@@ -329,6 +338,12 @@ function getFahrenheit(event) {
     let forecastFahrenheitLow = low.innerHTML;
     low.innerHTML = `${Math.round((forecastFahrenheitLow * 9) / 5 + 32)}`;
   });
+
+  let hourlyHigh = document.querySelectorAll(".hourly");
+  hourlyHigh.forEach(function (hourlyHigh) {
+    let hourlyFahrenheitHigh = hourlyHigh.innerHTML;
+    hourlyHigh.innerHTML = `${Math.round((hourlyFahrenheitHigh * 9) / 5 + 32)}`;
+  });
   //wind conversion
   let wind = document.querySelector("#wind");
   let mileSpeed = wind.innerHTML / 1.6;
@@ -364,7 +379,7 @@ let forecastFahrenheitHigh = null;
 let forecastFahrenheitLow = null;
 let currentFahrenheitHigh = null;
 let currentFahrenheitLow = null;
-let hourlyFahrenheit = null;
+let hourlyHigh = null;
 let hourly = null;
 let daily = null;
 
