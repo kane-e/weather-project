@@ -15,8 +15,8 @@
 <title>WeatherNow</title>
 </head>
 
-<body onload="greeting();">
-    <div class="container">
+<body onload="greeting();" class="background-image" >
+    
       
         
         <div class="weather-app">
@@ -24,7 +24,7 @@
           <h3 class= "date-time"><span id="date-time"></span></h3>
           
             <hr>
-            
+            <div class="error-wrapper">
             <form class="search-form">
                 <input type="text" placeholder="Enter City or ZIP, CC" spellcheck= "false" autocomplete="off" autofocus="on"
                     id="search-input" />
@@ -36,7 +36,7 @@
                 <button id="random-button"><i class="fas fa-globe"></i></button>
                 <div id="random-message">Search Random City</div>
             </form>
-            <div class= "error-wrapper">
+            
               <h1 id="city"> </h1>
               
                 <div class="row current-temp">
@@ -87,7 +87,7 @@
         
             <div id="code-by"><a href="https://github.com/kane-e/weather-project" target="_blank">Open-source code</a> by Emma Kane <small>🙋‍♀️</small></div>
           </div>
-        </div>
+        
        
       
 

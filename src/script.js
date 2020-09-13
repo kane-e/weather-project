@@ -177,8 +177,41 @@ function getWeather(response) {
   // set background image
   let currentIcon = response.data.weather[0].icon;
   let body = document.querySelector("body");
-  if (currentIcon === "04d") {
-    body.style.backgroundImage = `url(images/clouds.jpg)`;
+  body.style.backgroundSize = "100% 100%";
+  if (
+    currentIcon === "04d" ||
+    currentIcon === "04n" ||
+    currentIcon === "02d" ||
+    currentIcon === "03d" ||
+    currentIcon === "03n"
+  ) {
+    body.style.backgroundImage = `url(images/clouds2.jpg)`;
+  }
+  if (currentIcon === "02n") {
+    body.style.backgroundImage = `url(images/clouds-night.jpg)`;
+  }
+  if (currentIcon === "01d") {
+    body.style.backgroundImage = `url(images/clear-day.jpg)`;
+  }
+  if (currentIcon === "01n") {
+    body.style.backgroundImage = `url(images/clear-night.jpg)`;
+  }
+  if (
+    currentIcon === "09d" ||
+    currentIcon === "09n" ||
+    currentIcon === "10d" ||
+    currentIcon === "10n"
+  ) {
+    body.style.backgroundImage = `url(images/rain.jpg)`;
+  }
+  if (currentIcon === "11d" || currentIcon === "11n") {
+    body.style.backgroundImage = `url(images/thunder.jpg)`;
+  }
+  if (currentIcon === "13d" || currentIcon === "13n") {
+    body.style.backgroundImage = `url(images/snow.jpg)`;
+  }
+  if (currentIcon === "50d" || currentIcon === "50n") {
+    body.style.backgroundImage = `url(images/mist2.jpg)`;
   }
 
   // retrieve forecast api
@@ -189,6 +222,7 @@ function getWeather(response) {
   axios.get(apiUrl).then(getForecast);
   axios.get(apiUrl).then(getHourly);
 }
+
 function getForecastDay(timestamp) {
   let dt = new Date(timestamp);
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
