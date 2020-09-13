@@ -173,6 +173,14 @@ function getWeather(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
+
+  // set background image
+  let currentIcon = response.data.weather[0].icon;
+  let body = document.querySelector("body");
+  if (currentIcon === "04d") {
+    body.style.backgroundImage = `url(images/clouds.jpg)`;
+  }
+
   // retrieve forecast api
   let lat = response.data.coord.lat;
   let lon = response.data.coord.lon;
