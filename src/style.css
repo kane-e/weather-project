@@ -25,21 +25,20 @@ body {
 .greeting {
   -webkit-animation: fadeout 0.5s 3s;
   animation: fadeout 0.5s 3s;
-  min-width: 180px;
+
+  width: 180px;
   height: 32px;
-  margin-left: 160px;
   text-align: center;
-  position: fixed;
+  position: absolute;
   border: none;
   z-index: 1;
   top: 30px;
+  left: 580px;
   font-size: 17px;
   font-weight: 300px;
-  border-radius: 5px;
-  background-color: #b21a1a;
+  background-color: #7790c1;
   color: #f3c623;
   padding-top: 6px;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
 }
 
 /* seach bar */
@@ -47,8 +46,6 @@ body {
   text-align: center;
   margin: 20px auto;
   font-size: 15px;
-  margin-bottom: 15px;
-  margin-top: 22px;
 }
 #search-input {
   background-color: rgba(0, 0, 0, 0.5);
@@ -78,7 +75,7 @@ body {
 #location-button,
 #random-button {
   background-color: transparent;
-  color: #900d0d;
+  color: #810000;
   border: none;
   font-size: 22px;
 }
@@ -171,7 +168,7 @@ hr {
   text-align: center;
 }
 .conditions .fas {
-  color: #900d0d;
+  color: #810000;
 }
 /* forecast */
 .forecast-links {
@@ -214,7 +211,7 @@ hr {
 }
 #code-by {
   color: white;
-  position: fixed;
+  position: absolute;
   bottom: 0;
 }
 /* button hover message*/
