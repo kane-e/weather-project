@@ -211,7 +211,7 @@ hr {
 }
 #code-by {
   color: white;
-  position: absolute;
+  position: relative;
   bottom: 0;
 }
 /* button hover message*/
