@@ -36,8 +36,9 @@ body {
   font-weight: 300px;
   border-radius: 5px;
   background-color: #900d0d;
-  color: #f3c623;
+  color: whitesmoke;
   padding-top: 6px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
 }
 
 /* seach bar */
@@ -188,9 +189,11 @@ hr {
   border-radius: 5px;
 }
 
-.forecast img,
-.hourly img {
+.forecast img {
   width: 52px;
+}
+.hourly img {
+  width: 55px;
 }
 
 /* error page */
@@ -255,35 +258,13 @@ hr {
   display: none;
 }
 
-@-webkit-keyframes fadein {
-  from {
-    top: 0;
-    opacity: 0;
-  }
-  to {
-    top: 30px;
-    opacity: 1;
-  }
-}
-
-@keyframes fadein {
-  from {
-    top: 0;
-    opacity: 0;
-  }
-  to {
-    top: 30px;
-    opacity: 1;
-  }
-}
-
 @-webkit-keyframes fadeout {
   from {
     top: 30px;
     opacity: 1;
   }
   to {
-    top: 0;
+    top: 30px;
     opacity: 0;
   }
 }
@@ -294,7 +275,7 @@ hr {
     opacity: 1;
   }
   to {
-    top: 0;
+    top: 30px;
     opacity: 0;
   }
 }

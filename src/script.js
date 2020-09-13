@@ -230,22 +230,24 @@ function getForecast(response) {
 
 function getHourly(response) {
   event.preventDefault();
-
+  //display hourly forecast
   let hourlyElement = document.querySelector(".hourly");
+  hourlyElement.innerHTML = null;
   let hourly = null;
 
   for (let index = 1; index < 6; index++) {
     hourly = response.data.hourly[index];
-    hourlyFahrenheit = hourly.temp;
+    hourlyFahrenheitHigh = hourly.temp;
 
     hourlyElement.innerHTML += `<div class="col col-xs-1">
-          <div>${formatHours(hourly.dt * 1000)}</div>
-          <div> <span class="hourly-high">${Math.round(
-            hourlyFahrenheit
+          <div style="font-size:14px">${formatHours(hourly.dt * 1000)}</div>
+          <div> <span class="hourly-high" style="font-size:20px">${Math.round(
+            hourlyFahrenheitHigh
           )}</span>°</div>
           <div><img src="http://openweathermap.org/img/wn/${
             hourly.weather[0].icon
           }@2x.png"></div>
+          
           </div>`;
   }
 }
@@ -254,7 +256,6 @@ function hideDaily(event) {
   event.preventDefault();
   document.querySelector(".forecast").classList.add("hide");
   document.querySelector(".hourly").classList.remove("hide");
-
   document.querySelector("#daily-link").classList.add("not-active");
   document.querySelector("#daily-link").classList.remove("active");
   document.querySelector("#hourly-link").classList.add("active");
@@ -264,7 +265,6 @@ function hideHourly(event) {
   event.preventDefault();
   document.querySelector(".forecast").classList.remove("hide");
   document.querySelector(".hourly").classList.add("hide");
-
   document.querySelector("#daily-link").classList.add("active");
   document.querySelector("#daily-link").classList.remove("not-active");
   document.querySelector("#hourly-link").classList.add("not-active");
@@ -289,7 +289,7 @@ function getCelsius(event) {
   document.querySelector("#current-temp").innerHTML = Math.round(
     celsiusTemperature
   );
-  // forecast conversions
+  // daily forecast conversions
   let high = document.querySelectorAll(".forecast-high");
   let low = document.querySelectorAll(".forecast-low");
   high.forEach(function (high) {
@@ -300,7 +300,7 @@ function getCelsius(event) {
     let forecastCelsiusLow = (low.innerHTML - 32) * (5 / 9);
     low.innerHTML = `${Math.round(forecastCelsiusLow)}`;
   });
-
+  // hourly forecast conversion
   let hourlyHigh = document.querySelectorAll(".hourly-high");
   hourlyHigh.forEach(function (hourlyHigh) {
     let hourlyCelsiusHigh = (hourlyHigh.innerHTML - 32) * (5 / 9);
@@ -331,7 +331,7 @@ function getFahrenheit(event) {
   let fahrenheitLow = document.querySelector("#current-low");
   fahrenheitHigh.innerHTML = `${Math.round(currentFahrenheitHigh)}`;
   fahrenheitLow.innerHTML = `${Math.round(currentFahrenheitLow)}`;
-  //forecast conversions
+  // daily forecast conversions
   let high = document.querySelectorAll(".forecast-high");
   let low = document.querySelectorAll(".forecast-low");
   high.forEach(function (high) {
@@ -342,8 +342,8 @@ function getFahrenheit(event) {
     let forecastFahrenheitLow = low.innerHTML;
     low.innerHTML = `${Math.round((forecastFahrenheitLow * 9) / 5 + 32)}`;
   });
-
-  let hourlyHigh = document.querySelectorAll(".hourly");
+  // hourly forecast conversion
+  let hourlyHigh = document.querySelectorAll(".hourly-high");
   hourlyHigh.forEach(function (hourlyHigh) {
     let hourlyFahrenheitHigh = hourlyHigh.innerHTML;
     hourlyHigh.innerHTML = `${Math.round((hourlyFahrenheitHigh * 9) / 5 + 32)}`;
@@ -383,8 +383,8 @@ let forecastFahrenheitHigh = null;
 let forecastFahrenheitLow = null;
 let currentFahrenheitHigh = null;
 let currentFahrenheitLow = null;
-let hourlyHigh = null;
-let hourly = null;
-let daily = null;
+let hourlyFahrenheitHigh = null;
 
 searchCity("Tokyo");
+
+console.log("hourly conversion and font size");
