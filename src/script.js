@@ -177,7 +177,7 @@ function getWeather(response) {
   // set background image
   let currentIcon = response.data.weather[0].icon;
   let body = document.querySelector("body");
-  body.style.backgroundSize = "100% 100%";
+  body.style.backgroundSize = "110% 110%";
   if (
     currentIcon === "04d" ||
     currentIcon === "04n" ||
