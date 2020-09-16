@@ -26,7 +26,6 @@ body {
 .greeting {
   -webkit-animation: fadeout 0.5s 3s;
   animation: fadeout 0.5s 3s;
-
   width: 180px;
   height: 32px;
   text-align: center;
