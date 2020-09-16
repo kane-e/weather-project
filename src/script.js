@@ -39,10 +39,10 @@ $(document).ready(function () {
     });
   }
 
-  function runGeo() {
+  $("#location-button").click(function () {
     // retrieves current coordinates
     navigator.geolocation.getCurrentPosition(getPosition);
-  }
+  });
 
   function getPosition(position) {
     let lat = position.coords.latitude;
@@ -64,7 +64,7 @@ $(document).ready(function () {
       .catch((err) => handleError(err));
   }
 
-  function searchRandomCity(event) {
+  $("#random-button").click(function () {
     let cities = [
       "London",
       "New York",
@@ -83,7 +83,7 @@ $(document).ready(function () {
     let units = "imperial";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
     axios.get(apiUrl).then(getWeather);
-  }
+  });
 
   function searchZip(zip, countryCode) {
     let units = "imperial";
@@ -97,10 +97,9 @@ $(document).ready(function () {
       .catch((err) => handleError(err));
   }
 
-  function getCity(event) {
+  $(".search-form").submit(function (event) {
     event.preventDefault();
     let searchInput = document.querySelector("#search-input");
-
     let searchArray = searchInput.value.split(",");
     //test for zip,country
     if (!isNaN(searchInput)) {
@@ -112,18 +111,13 @@ $(document).ready(function () {
       //assume city
       searchCity(searchInput.value);
     }
-  }
+  });
 
   function handleError(err) {
     if (err != null && err.response.status == 404) {
-      document
-        .querySelector(".error-wrapper")
-        .addEventListener("click", function () {});
-      document.querySelector(
-        ".error-wrapper"
-      ).innerHTML = `<div  id="error" aria-hidden="true">
+      $(".error-wrapper").html(`<div  id="error" aria-hidden="true">
  Couldn't find that!<br> Click on the monkey to search again.<div><button onClick="window.location.reload();" id="reload"> 🙈</button></div>
-</div>`;
+</div>`);
     }
   }
 
@@ -273,44 +267,41 @@ $(document).ready(function () {
     }
   }
 
-  function hideDaily(event) {
+  //Toggle daily and hourly forecasts
+  let $dailyLink = $("#daily-link");
+  let $hourlyLink = $("#hourly-link");
+  $hourlyLink.click(function (event) {
     event.preventDefault();
     $(".forecast").addClass("hide");
     $(".hourly").removeClass("hide");
-    $("#daily-link").addClass("not-active");
-    $("#daily-link").removeClass("active");
-    $("#hourly-link").addClass("active");
-    $("#hourly-link").removeClass("not-active");
-  }
-  function hideHourly(event) {
+    $("#daily-link").toggleClass("not-active active");
+    $("#hourly-link").toggleClass("not-active active");
+  });
+
+  $dailyLink.click(function (event) {
     event.preventDefault();
     $(".forecast").removeClass("hide");
     $(".hourly").addClass("hide");
-    $("#daily-link").addClass("active");
-    $("#daily-link").removeClass("not-active");
-    $("#hourly-link").addClass("not-active");
-    $("#hourly-link").removeClass("active");
-  }
-  function getCelsius(event) {
+    $("#daily-link").toggleClass("not-active active");
+    $("#hourly-link").toggleClass("not-active active");
+  });
+
+  // Celsius Conversions
+  let $celsiusLink = $("#celsius-link");
+  let $fahrenheitLink = $("#fahrenheit-link");
+  $celsiusLink.click(function (event) {
     event.preventDefault();
-    celsiusLink.classList.add("active");
-    fahrenheitLink.classList.remove("active");
-    fahrenheitLink.classList.add("not-active");
-    celsiusLink.classList.remove("not-active");
-    fahrenheitLink.addEventListener("click", getFahrenheit);
-    celsiusLink.removeEventListener("click", getCelsius);
-    // current temperature conversions
+    $fahrenheitLink.toggleClass("not-active active");
+    $celsiusLink.toggleClass("not-active active");
+
+    // Current temperature conversions
     let celsiusTemperature = (fahrenheitTemperature - 32) * (5 / 9);
     let currentCelsiusHigh = (currentFahrenheitHigh - 32) * (5 / 9);
     let currentCelsiusLow = (currentFahrenheitLow - 32) * (5 / 9);
-    let celsiusHigh = document.querySelector("#current-high");
-    let celsiusLow = document.querySelector("#current-low");
-    celsiusHigh.innerHTML = `${Math.round(currentCelsiusHigh)}`;
-    celsiusLow.innerHTML = `${Math.round(currentCelsiusLow)}`;
-    document.querySelector("#current-temp").innerHTML = Math.round(
-      celsiusTemperature
-    );
-    // daily forecast conversions
+    $("#current-high").html(`${Math.round(currentCelsiusHigh)}`);
+    $("#current-low").html(`${Math.round(currentCelsiusLow)}`);
+    $("#current-temp").html(Math.round(celsiusTemperature));
+    // Daily forecast conversions
     let high = document.querySelectorAll(".forecast-high");
     let low = document.querySelectorAll(".forecast-low");
     high.forEach(function (high) {
@@ -321,38 +312,28 @@ $(document).ready(function () {
       let forecastCelsiusLow = (low.innerHTML - 32) * (5 / 9);
       low.innerHTML = `${Math.round(forecastCelsiusLow)}`;
     });
-    // hourly forecast conversion
+    // Hourly forecast conversion
     let hourlyHigh = document.querySelectorAll(".hourly-high");
     hourlyHigh.forEach(function (hourlyHigh) {
       let hourlyCelsiusHigh = (hourlyHigh.innerHTML - 32) * (5 / 9);
       hourlyHigh.innerHTML = `${Math.round(hourlyCelsiusHigh)}`;
     });
-    //wind conversion
-    let wind = document.querySelector("#wind");
+    // Wind conversion
     let kilometerSpeed = wind.innerHTML * 1.6;
-    wind.innerHTML = `${Math.round(kilometerSpeed)}`;
-
-    let windUnit = document.querySelector("#wind-unit");
-    windUnit.innerHTML = " kph";
-  }
-
-  function getFahrenheit(event) {
+    $("#wind").html(`${Math.round(kilometerSpeed)}`);
+    $("#wind-unit").html(" kph");
+  });
+  //Fahrenheit Conversions
+  $fahrenheitLink.click(function (event) {
     event.preventDefault();
-    fahrenheitLink.classList.add("active");
-    fahrenheitLink.classList.remove("not-active");
-    celsiusLink.classList.remove("active");
-    celsiusLink.classList.add("not-active");
-    fahrenheitLink.removeEventListener("click", getFahrenheit);
-    celsiusLink.addEventListener("click", getCelsius);
-    //current temperature conversions
-    document.querySelector("#current-temp").innerHTML = Math.round(
-      fahrenheitTemperature
-    );
-    let fahrenheitHigh = document.querySelector("#current-high");
-    let fahrenheitLow = document.querySelector("#current-low");
-    fahrenheitHigh.innerHTML = `${Math.round(currentFahrenheitHigh)}`;
-    fahrenheitLow.innerHTML = `${Math.round(currentFahrenheitLow)}`;
-    // daily forecast conversions
+    $fahrenheitLink.toggleClass("not-active active");
+    $celsiusLink.toggleClass("not-active active");
+
+    // Current temperature conversions
+    $("#current-temp").html(Math.round(fahrenheitTemperature));
+    $("#current-high").html(`${Math.round(currentFahrenheitHigh)}`);
+    $("#current-low").html(`${Math.round(currentFahrenheitLow)}`);
+    // Daily forecast conversions
     let high = document.querySelectorAll(".forecast-high");
     let low = document.querySelectorAll(".forecast-low");
     high.forEach(function (high) {
@@ -363,7 +344,7 @@ $(document).ready(function () {
       let forecastFahrenheitLow = low.innerHTML;
       low.innerHTML = `${Math.round((forecastFahrenheitLow * 9) / 5 + 32)}`;
     });
-    // hourly forecast conversion
+    // Hourly forecast conversion
     let hourlyHigh = document.querySelectorAll(".hourly-high");
     hourlyHigh.forEach(function (hourlyHigh) {
       let hourlyFahrenheitHigh = hourlyHigh.innerHTML;
@@ -371,36 +352,13 @@ $(document).ready(function () {
         (hourlyFahrenheitHigh * 9) / 5 + 32
       )}`;
     });
-    //wind conversion
-    let wind = document.querySelector("#wind");
+    // Wind conversion
     let mileSpeed = wind.innerHTML / 1.6;
-    wind.innerHTML = `${Math.round(mileSpeed)}`;
-    let windUnit = document.querySelector("#wind-unit");
-    windUnit.innerHTML = " mph";
-  }
-
-  let apiKey = "0d71af642be5de39b82dbc1fda436287";
-
-  let searchForm = document.querySelector(".search-form");
-  searchForm.addEventListener("submit", getCity);
-
-  let locationButton = document.querySelector("#location-button");
-  locationButton.addEventListener("click", runGeo);
-
-  let randomButton = document.querySelector("#random-button");
-  randomButton.addEventListener("click", searchRandomCity);
-
-  $("#celsius-link").click(function () {
-    getCelsius(event);
+    $("#wind").html(`${Math.round(mileSpeed)}`);
+    $("#wind-unit").html(" mph");
   });
 
-  let fahrenheitLink = document.querySelector("#fahrenheit-link");
-
-  let hourlyLink = document.querySelector("#hourly-link");
-  hourlyLink.addEventListener("click", hideDaily);
-
-  let dailyLink = document.querySelector("#daily-link");
-  dailyLink.addEventListener("click", hideHourly);
+  let apiKey = "0d71af642be5de39b82dbc1fda436287";
 
   let fahrenheitTemperature = null;
   let forecastFahrenheitHigh = null;
