@@ -116,14 +116,14 @@ $(document).ready(function () {
   function handleError(err) {
     if (err != null && err.response.status == 404) {
       $(".error-wrapper").html(`<div  id="error" aria-hidden="true">
- Couldn't find that!<br> Click on the monkey to search again.<div><button onClick="window.location.reload();" id="reload"> 🙈</button></div>
-</div>`);
+    Couldn't find that!<br> Click on the monkey to search again.<div><button onClick="window.location.reload();" id="reload"> 🙈</button></div>
+    </div>`);
     }
   }
 
   function getWeather(response) {
     console.log(response.data);
-    // current conditions
+    // Current conditions
     fahrenheitTemperature = response.data.main.temp;
     $("#current-temp").html(Math.round(fahrenheitTemperature));
     $("h1").html(`${response.data.name}, ${response.data.sys.country}`);
@@ -132,27 +132,34 @@ $(document).ready(function () {
     $(".current-condition").html(response.data.weather[0].main);
     $("#date-time").html(formatDate(response.data.dt * 1000));
 
-    // hide greeting
-    $(".greeting").fadeOut(3000);
+    // Hide greeting
 
-    let hours = new Date().getHours();
-    if (hours < 12) {
-      $(".greeting").text("Good Morning");
-    }
-    if (hours >= 12 && hours <= 16) {
-      $(".greeting").text("Good Afternoon");
-    }
-    if (hours >= 17) {
-      $(".greeting").text("Good Evening");
-    }
+    $(".header")
+      .html(function () {
+        let hours = new Date().getHours();
+        if (hours < 12) {
+          $(".header").text("Good Morning");
+        }
+        if (hours >= 12 && hours <= 16) {
+          $(".header").text("Good Afternoon");
+        }
+        if (hours >= 17) {
+          $(".header").text("Good Evening");
+        }
+      })
+      .fadeOut(5000, function () {
+        $(this)
+          .html(formatDate(response.data.dt * 1000))
+          .fadeIn(5000);
+      });
 
-    // set current icon
+    // Set current icon
     $("#icon").attr({
       src: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       alt: response.data.weather[0].description,
     });
 
-    // set background image
+    // Set background image
     let currentIcon = response.data.weather[0].icon;
     let $body = $("body");
     if (
@@ -191,11 +198,11 @@ $(document).ready(function () {
       $body.css(`background`, `url(images/mist2.jpg)`);
     }
     $body.css("background-size", "100% 100%");
-    // retrieve forecast api
+    // Retrieve forecast api
     let lat = response.data.coord.lat;
     let lon = response.data.coord.lon;
     let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&
-  exclude=minutely&appid=${apiKey}&units=imperial`;
+    exclude=minutely&appid=${apiKey}&units=imperial`;
     axios.get(apiUrl).then(getForecast);
     axios.get(apiUrl).then(getHourly);
   }
@@ -209,7 +216,6 @@ $(document).ready(function () {
 
   function getForecast(response) {
     console.log(response.data);
-    event.preventDefault();
 
     let forecastElement = document.querySelector(".forecast");
     forecastElement.innerHTML = null;
