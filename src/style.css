@@ -62,7 +62,13 @@ body {
   border: none;
   font-size: 22px;
 }
-
+.tooltip-inner {
+  background-color: rgba(0, 0, 0, 0.8);
+  font-size: 10px;
+}
+.tooltip .arrow::before {
+  border-top-color: rgba(0, 0, 0, 0.8);
+}
 hr {
   border: 1px dotted rgba(243, 198, 35, 0.6);
   width: 100%;
@@ -199,44 +205,6 @@ hr {
   left: 440px;
   color: palevioletred;
   text-shadow: none;
-}
-/* button hover message*/
-#location-message {
-  visibility: hidden;
-  position: absolute;
-  top: 72px;
-  right: 534px;
-  font-size: 10px;
-  transition: all 150ms ease-in-out;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  background-color: ghostwhite;
-  color: black;
-  padding: 1px;
-  opacity: 0.9;
-}
-
-#location-button:hover + #location-message {
-  visibility: visible;
-}
-#random-message {
-  display: none;
-  position: absolute;
-  top: 72px;
-  right: 477px;
-  font-size: 10px;
-  transition: all 200ms ease-in-out;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  background-color: ghostwhite;
-
-  color: black;
-  padding: 1px;
-  opacity: 0.9;
-}
-
-#random-button:hover + #random-message {
-  display: inline;
 }
 
 .hide {

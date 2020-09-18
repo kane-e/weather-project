@@ -1,4 +1,8 @@
 $(document).ready(function () {
+  $('[data-toggle="tooltip"]').tooltip({
+    container: "body",
+  });
+
   function formatDate(timestamp) {
     let date = new Date(timestamp);
     let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
