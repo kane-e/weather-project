@@ -123,17 +123,8 @@ $(document).ready(function () {
 
   function getWeather(response) {
     console.log(response.data);
-    // Current conditions
-    fahrenheitTemperature = response.data.main.temp;
-    $("#current-temp").html(Math.round(fahrenheitTemperature));
-    $("h1").html(`${response.data.name}, ${response.data.sys.country}`);
-    $("#wind").html(Math.round(response.data.wind.speed));
-    $("#humidity").html(response.data.main.humidity);
-    $(".current-condition").html(response.data.weather[0].main);
-    $("#date-time").html(formatDate(response.data.dt * 1000));
 
-    // Hide greeting
-
+    // Display greeting then date/time
     $(".header")
       .html(function () {
         let hours = new Date().getHours();
@@ -152,6 +143,14 @@ $(document).ready(function () {
           .html(formatDate(response.data.dt * 1000))
           .fadeIn(5000);
       });
+
+    // Current conditions
+    fahrenheitTemperature = response.data.main.temp;
+    $("#current-temp").html(Math.round(fahrenheitTemperature));
+    $("h1").html(`${response.data.name}, ${response.data.sys.country}`);
+    $("#wind").html(Math.round(response.data.wind.speed));
+    $("#humidity").html(response.data.main.humidity);
+    $(".current-condition").html(response.data.weather[0].main);
 
     // Set current icon
     $("#icon").attr({
@@ -197,7 +196,7 @@ $(document).ready(function () {
     if (currentIcon === "50d" || currentIcon === "50n") {
       $body.css(`background`, `url(images/mist2.jpg)`);
     }
-    $body.css("background-size", "100% 100%");
+    $body.css("background-size", "105% 105%");
     // Retrieve forecast api
     let lat = response.data.coord.lat;
     let lon = response.data.coord.lon;
