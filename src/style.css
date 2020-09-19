@@ -5,13 +5,15 @@ body {
   color: #2d2b2b;
   font-weight: 600;
 }
-
+.app-wrapper {
+  max-width: 500px;
+  margin: 20px auto;
+}
 .weather-app {
   border: 2px solid gray;
   border-radius: 10px;
   height: 580px;
-  max-width: 500px;
-  margin: 20px auto;
+
   overflow: hidden;
   display: block;
   cursor: default;
@@ -201,9 +203,6 @@ hr {
   border: none;
 }
 #code-by {
-  position: fixed;
-  top: 600px;
-  left: 440px;
   color: palevioletred;
   text-shadow: none;
 }

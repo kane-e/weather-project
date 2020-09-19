@@ -23,20 +23,19 @@
 <title>WeatherNow</title>
 </head>
 <body>
-        <div id="code-by"><a href="https://github.com/kane-e/weather-project" target="_blank">Open-source code</a> by Emma Kane
-          <small>🙋‍♀️</small></div>
-        <div class="weather-app">
-          <h3 class="header"></h3>
+  <div class= "app-wrapper">
+    <div class="weather-app">
+      <h3 class="header"></h3>
           
-            <hr>
+        <hr>
             <div class="error-wrapper">
             <form class="search-form">
-                <input type="text" placeholder="Enter City or ZIP, CC" spellcheck= "false" autocomplete="off" autofocus="on"
+              <input type="text" placeholder="Enter City or ZIP, CC" spellcheck= "false" autocomplete="off" autofocus="on"
                     id="search-input" />
-                <input type="submit" value="Search" id="submit" />
+              <input type="submit" value="Search" id="submit" />
             
-                <button id="location-button" class="location-button" data-toggle="tooltip" data-placement="top" Title="My Location"><i class="fas fa-map-marker-alt"></i></button>
-                <button id="random-button"data-toggle="tooltip" data-placement="top" Title="Random City"><i class="fas fa-globe"></i></button>
+              <button id="location-button" class="location-button" data-toggle="tooltip" data-placement="top" Title="My Location"><i class="fas fa-map-marker-alt"></i></button>
+              <button id="random-button"data-toggle="tooltip" data-placement="top" Title="Random City"><i class="fas fa-globe"></i></button>
             </form>
             
               <h1 id="city"> </h1>
@@ -87,7 +86,9 @@
                
             </div>
           </div>
-      
+      <div id="code-by"><a href="https://github.com/kane-e/weather-project" target="_blank">Open-source code</a> by Emma Kane
+        <small>🙋‍♀️</small></div>
+        </div>
     <script src="src/script.js"></script>
   
 </body>
