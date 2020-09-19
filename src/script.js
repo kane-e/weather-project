@@ -61,6 +61,7 @@ $(document).ready(function () {
 
   function searchCity(city) {
     let units = "imperial";
+
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
     axios
       .get(apiUrl)
@@ -175,13 +176,13 @@ $(document).ready(function () {
       $body.css("background", `url(images/clouds2.jpg)`);
     }
     if (currentIcon === "02n") {
-      $body.css(`background`, `url(images/clouds-night.jpg)`);
+      $body.css(`background`, `url(images/clouds-night2.jpg)`);
     }
     if (currentIcon === "01d") {
       $body.css(`background`, `url(images/clear-day.jpg)`);
     }
     if (currentIcon === "01n") {
-      $body.css(`background`, `url(images/clear-night.jpg)`);
+      $body.css(`background`, `url(images/clear-night3.jpg)`);
     }
     if (
       currentIcon === "09d" ||
@@ -189,7 +190,7 @@ $(document).ready(function () {
       currentIcon === "10d" ||
       currentIcon === "10n"
     ) {
-      $body.css(`background`, `url(images/rain.jpg)`);
+      $body.css(`background`, `url(images/rain2.jpg)`);
     }
     if (currentIcon === "11d" || currentIcon === "11n") {
       $body.css(`background`, `url(images/thunder.jpg)`);
@@ -198,7 +199,7 @@ $(document).ready(function () {
       $body.css(`background`, `url(images/snow.jpg)`);
     }
     if (currentIcon === "50d" || currentIcon === "50n") {
-      $body.css(`background`, `url(images/mist2.jpg)`);
+      $body.css(`background`, `url(images/mist.jpg)`);
     }
     $body.css("background-size", "105% 105%");
     // Retrieve forecast api
@@ -327,6 +328,7 @@ $(document).ready(function () {
       let hourlyCelsiusHigh = (hourlyHigh.innerHTML - 32) * (5 / 9);
       hourlyHigh.innerHTML = `${Math.round(hourlyCelsiusHigh)}`;
     });
+
     // Wind conversion
     let kilometerSpeed = wind.innerHTML * 1.6;
     $("#wind").html(`${Math.round(kilometerSpeed)}`);
@@ -356,7 +358,7 @@ $(document).ready(function () {
     // Hourly forecast conversion
     let hourlyHigh = document.querySelectorAll(".hourly-high");
     hourlyHigh.forEach(function (hourlyHigh) {
-      let hourlyFahrenheitHigh = hourlyHigh.innerHTML;
+      hourlyFahrenheitHigh = hourlyHigh.innerHTML;
       hourlyHigh.innerHTML = `${Math.round(
         (hourlyFahrenheitHigh * 9) / 5 + 32
       )}`;
