@@ -108,10 +108,10 @@ $(document).ready(function () {
     let searchArray = searchInput.value.split(",");
     //test for zip,country
     if (!isNaN(searchInput)) {
-      searchZip(searchInput, "");
+      searchZip(searchInput);
     } else if (searchArray.length == 2 && Number.isInteger(searchArray[0])) {
       // zipcode and country
-      searchZip(searchArray[0], searchArray(1));
+      searchZip(searchArray[0], searchArray[1]);
     } else {
       //assume city
       searchCity(searchInput.value);
