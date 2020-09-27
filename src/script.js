@@ -62,7 +62,6 @@ function getPosition(position) {
 
 function searchCity(city) {
   let units = "imperial";
-
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
   axios
     .get(apiUrl)
@@ -110,8 +109,8 @@ $(".search-form").submit(function (event) {
   //test for zip,country
   if (!isNaN(searchInput)) {
     searchZip(searchInput);
-  } else if (searchArray.length == 2 && Number.isInteger(searchArray[0])) {
     // zipcode and country
+  } else if (searchArray.length == 2 && Number.isInteger(searchArray[0])) {
     searchZip(searchArray[0], searchArray[1]);
   } else {
     //assume city
