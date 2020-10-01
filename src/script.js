@@ -127,8 +127,6 @@ function handleError(err) {
 }
 
 function getWeather(response) {
-  console.log(response.data);
-
   // Display greeting then date/time
   $(".header")
     .html(function () {
@@ -219,8 +217,6 @@ function getForecastDay(timestamp) {
 }
 
 function getForecast(response) {
-  console.log(response.data);
-
   let forecastElement = document.querySelector(".forecast");
   forecastElement.innerHTML = null;
   let forecast = null;
